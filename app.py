@@ -3,6 +3,7 @@ from IPython.display import Audio
 from moviepy.editor import AudioFileClip
 from openai import OpenAI
 import sys
+import os
 
 # Load the Whisper base model
 model = whisper.load_model("base")
@@ -20,15 +21,19 @@ def mp3_to_wav(mp3_file_path):
     
 def speech_to_text(audio_file_path):
     try:
+        if not os.path.exists(audio_file_path):
+            print("Error: The specified audio file does not exist.")
+            return None
         # Convert MP3 to WAV
         wav_file_path = mp3_to_wav(audio_file_path)
         if not wav_file_path:
             return None
+        print(f"Attempting to load audio from: {wav_file_path}")
         
         # Load audio from the converted WAV file
         audio = whisper.load_audio(wav_file_path)
         # Pad or trim the audio to fit 30 seconds
-        audio = whisper.pad_or_trim(audio, duration=30)
+        audio = whisper.pad_or_trim(audio)
         # Generate log-Mel spectrogram and move to the same device as the model
         mel = whisper.log_mel_spectrogram(audio).to(model.device)
         # Detect the spoken language
@@ -37,7 +42,8 @@ def speech_to_text(audio_file_path):
         # Decode the audio
         options = whisper.DecodingOptions()
         result = whisper.decode(model, mel, options)
-        return result
+        transcribed_text = result.text
+        return transcribed_text
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
@@ -52,7 +58,7 @@ if transcription is None:
 print("Transcription:")
 print(transcription)
 
-OPENAI_API_KEY = "YOUR OPENAI API KEY HERE"
+OPENAI_API_KEY = "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"
 client = OpenAI(api_key=OPENAI_API_KEY)
 prompt = f"""Give me an english movie script in atleast 5000-8000 words depicting the following instructions and scene discription:
 
