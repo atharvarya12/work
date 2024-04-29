@@ -26,4 +26,4 @@ Errors: [no errors]
 whisper_testing.py
 Description: Python script for testing whisper recognition.
 
-Errors: [NOT ABLE TO READ AUDIO FILE]
+Errors: [no errors]
