@@ -1,6 +1,10 @@
 app.py
 Description: Final Compilation. It's using prompt_testing and whisper_testing 
 
+add your API key
+
+having problems with long audio
+
 Errors: [Whisper's not able to read the audio file.]
 
 prompt_testing.py
