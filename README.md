@@ -5,7 +5,7 @@ add your API key
 
 having problems with long audio
 
-Errors: [Whisper's not able to read the audio file.]
+Errors: [no error.]
 
 prompt_testing.py
 Description: This file is used for testing prompts.
