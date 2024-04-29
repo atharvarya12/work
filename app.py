@@ -24,30 +24,21 @@ def speech_to_text(audio_file_path):
         if not os.path.exists(audio_file_path):
             print("Error: The specified audio file does not exist.")
             return None
+
         # Convert MP3 to WAV
         wav_file_path = mp3_to_wav(audio_file_path)
         if not wav_file_path:
             return None
-        print(f"Attempting to load audio from: {wav_file_path}")
-        
-        # Load audio from the converted WAV file
+
+        # Load audio 
         audio = whisper.load_audio(wav_file_path)
-        # Pad or trim the audio to fit 30 seconds
-        audio = whisper.pad_or_trim(audio)
-        # Generate log-Mel spectrogram and move to the same device as the model
-        mel = whisper.log_mel_spectrogram(audio).to(model.device)
-        # Detect the spoken language
-        _, probs = model.detect_language(mel)
-        print(f"Detected language: {max(probs, key=probs.get)}")
-        # Decode the audio
-        options = whisper.DecodingOptions()
-        result = whisper.decode(model, mel, options)
-        transcribed_text = result.text
-        return transcribed_text
+        options = {"fp16": False, "language": "ta", "task": "translate"}
+        result = model.transcribe(audio, **options)
+        translation=result['text']
+        return translation
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
-
 # Specify the path to the audio file
 audio_file_path = "D:\embrok\SPEECH_Script\LAst_Comit\scriptaudio.mp3"
 # Call the speech_to_text function with the audio file path
@@ -58,7 +49,7 @@ if transcription is None:
 print("Transcription:")
 print(transcription)
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "YOUR API KEY"
 client = OpenAI(api_key=OPENAI_API_KEY)
 prompt = f"""Give me an english movie script in atleast 5000-8000 words depicting the following instructions and scene discription:
 
@@ -147,10 +138,10 @@ completion = client.chat.completions.create(
   temperature = 0  
 )
 
-translated_text = completion.choices[0].message.content
+script_text = completion.choices[0].message.content
 
 file_path = "translated_text.txt"
 
 # Write the translated text to the file
 with open(file_path, "w") as file:
-    file.write(translated_text)
+    file.write(script_text)
