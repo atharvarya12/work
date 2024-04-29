@@ -17,9 +17,9 @@ Description: Output of prompt_testing containing translated text.
 whisper_recog.py
 Description: Python script for whisper recognition.
 
-Errors: [List any known errors or issues present in this file, along with any relevant details.]
+Errors: [NOT ABLE TO READ AUDIO FILE]
 
 whisper_testing.py
 Description: Python script for testing whisper recognition.
 
-Errors: [List any known errors or issues present in this file, along with any relevant details.]
+Errors: [NOT ABLE TO READ AUDIO FILE]
