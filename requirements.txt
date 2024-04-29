@@ -1,0 +1,6 @@
+ffmgep
+os
+sys
+IPython.display
+openai
+git+https://github.com/openai/whisper.git 
