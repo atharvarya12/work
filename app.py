@@ -52,7 +52,7 @@ if transcription is None:
 print("Transcription:")
 print(transcription)
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "YOUR OPENAI API KEY HERE"
 client = OpenAI(api_key=OPENAI_API_KEY)
 prompt = f"""Give me an english movie script in atleast 5000-8000 words depicting the following instructions and scene discription:
 
