@@ -2,6 +2,7 @@ import whisper
 from IPython.display import Audio
 from moviepy.editor import AudioFileClip
 import os
+#requires ffmgep instalation guide https://phoenixnap.com/kb/ffmpeg-windows
 
 # Load the Whisper base model
 model = whisper.load_model("base")
@@ -32,7 +33,7 @@ def speech_to_text(audio_file_path):
         # Load audio from the converted WAV file
         audio = whisper.load_audio(wav_file_path)
         # Pad or trim the audio to fit 30 seconds
-        audio = whisper.pad_or_trim(audio, duration=90)
+        audio = whisper.pad_or_trim(audio)
         # Generate log-Mel spectrogram and move to the same device as the model
         mel = whisper.log_mel_spectrogram(audio).to(model.device)
         # Detect the spoken language
