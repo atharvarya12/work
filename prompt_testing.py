@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "YOUR OPRNAI API KEY HERE"
 client = OpenAI(api_key=OPENAI_API_KEY)
 scene_description=input("give the instruction:")
 prompt=f"""Give me an english movie script in atleast 5000-8000 words depicting the following instructions and scene discription:
