@@ -54,9 +54,8 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 prompt = f"""Give me an english movie script in atleast 5000-8000 words depicting the following instructions and scene discription:
 
 [Additional Instructions]:
-- Ensure the script captures the essence of the scene in a conversational Tamil-English (Thanglish) style.
+- Ensure the script captures the essence of the scene in a conversational Tamil style.
 - Include descriptive dialogue and actions that reflect the mood and atmosphere of the scene.
-- Also give the discription of the SCENE HEADING,ACTION,CHARACTER,DIALOGUE,INTERCUT,SUBHEADER,FADE IN,Cut to in thanglish.
 
 [Notes for the AI]:
 - Consider the emotions and motivations of the characters involved in the scene.
@@ -66,75 +65,53 @@ prompt = f"""Give me an english movie script in atleast 5000-8000 words depictin
 
 [Output format]:
 
-SCENE HEADING
+SCENE HEADING:
+One line description of the location and time of day
 
-One line description of the
-location and time of day
+ACTION:
+The description of the actions in a scene
 
-ACTION
+CHARACTER:
+Identifies the character who is speaking
 
-The description of the
-actions in a scene
+DIALOGUE:
+The lines of speech your character says
 
-CHARACTER
+INTERCUT:
+Instructions when cutting to multiple locations
 
-Identifies the character who
-Is speaking
+SUBHEADER:
+Used when there are minor changes in a location
 
-DIALOGUE
+FADE IN:
+Marks the start of the screenplay.
 
-The lines of speech your
-character says
+SCENE NUMBER:
+Generally numbered only in the shooting script,
 
-INTERCUT
+TRANSITION:
 
-Instructions when eutting to
-muttiple locations
+EXTENSION:
+Clarifies where a character is when they can't be seen
 
-SUBHEADER
+PARENTHETICAL:
+Provides info on how the actor should say the line
 
-Used when there are minor
-changes in a location
-
-FADE IN
-
-Marks the start of the
-screenplay.
-
-SCENE NUMBER
-
-Generally numbered only
-in the shooting script,
-
-TRANSITION
-
-EXTENSION
-
-Clarifies where a character
-Is when they can't be seen
-
-PARENTHETICAL
-
-Provides info on how the
-actor should say the line
-
-SHOT
-
-Indicates the camera angle
-or movement in a scene
+SHOT:
+Indicates the camera angle or movement in a scene
 
 
 [Reminder]:
-Please remember this is an tamil script, to ensure accessibility and cultural relevance.
+Please remember this is an tamil movies script, to ensure accessibility and cultural relevance.
 
-[scene discription]:"""
+[scene description]:"""
 
 if transcription:
-    prompt += "\n\n[Scene Discription]:\n" + transcription
+    prompt += "\n\n[Scene Description]:\n" + transcription
 
 completion = client.chat.completions.create(
   model = 'gpt-3.5-turbo',
-  messages=[ {"role":"system", "content":"You are a tamil movie script co-writer who writes scenes based on the discriptions given by the main writer"}, {"role": "user", "content":prompt }],
+  messages=[ {"role":"system", "content":"You are a tamil movie script co-writer who writes scenes based on the descriptions given by the main writer"}, {"role": "user", "content":prompt }],
   temperature = 0  
 )
 
